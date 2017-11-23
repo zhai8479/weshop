@@ -15,7 +15,7 @@ class CreateIntegralLogsTable extends Migration
     {
         Schema::create('integralLogs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->comment('用户id')->unique();
+            $table->integer('user_id')->comment('用户id');
             $table->integer('change_integral')->comment('改变的积分数量');
             $table->integer('type')->comment('积分变更类型');
             $table->integer('in_out')->comment('收支类型');

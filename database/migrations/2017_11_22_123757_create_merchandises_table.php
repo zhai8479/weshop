@@ -18,11 +18,9 @@ class CreateMerchandisesTable extends Migration
             $table->string('merchandise_name',40)->comment('商品标题');
             $table->string('type',20)->comment('商品类型');
             $table->json('particulars')->comment('商品详情');
-            $table->integer('integrable_integral')->comment('可获得积分')->nullable();
             $table->integer('usable_integral')->comment('可使用积分')->nullable();
-            $table->float('Price_tag')->comment('标价');
+            $table->float('price_tag')->comment('标价');
             $table->float('Present_price')->comment('现价');
-            $table->string('property')->comment('商品属性');
             $table->timestamps();
         });
     }

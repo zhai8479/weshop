@@ -16,7 +16,7 @@ class CreateIntegralsTable extends Migration
         Schema::create('integrals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('邀请人id')->unique();
-            $table->integer('integral')->comment('剩余积分数量')->default(0);
+            $table->integer('integral')->comment('积分总数量')->default(0);
             $table->timestamps();
         });
     }
