@@ -13,9 +13,12 @@ class CreateStocksTable extends Migration
      */
     public function up()
     {
+        /**
+         * 创建库存表
+         */
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('merchandises_id')->comment('商品id');
+            $table->integer('commodity_id')->comment('商品id');
             $table->integer('unique_identifier')->comment('唯一标识');
             $table->integer('num_stock')->comment('库存数量');
             $table->timestamps();

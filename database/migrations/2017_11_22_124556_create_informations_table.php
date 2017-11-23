@@ -13,6 +13,9 @@ class CreateInformationsTable extends Migration
      */
     public function up()
     {
+        /**
+         * 创建收货信息表
+         */
         Schema::create('informations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('用户id');

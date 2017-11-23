@@ -13,6 +13,9 @@ class CreateIntegralsTable extends Migration
      */
     public function up()
     {
+        /**
+         * 创建积分表
+         */
         Schema::create('integrals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('邀请人id')->unique();

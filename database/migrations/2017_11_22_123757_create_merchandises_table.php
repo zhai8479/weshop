@@ -13,9 +13,12 @@ class CreateMerchandisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('merchandises', function (Blueprint $table) {
+        /*
+         * 创建商品表
+         */
+        Schema::create('commoditys', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('merchandise_name',40)->comment('商品标题');
+            $table->string('commodity_name',40)->comment('商品标题');
             $table->string('type',20)->comment('商品类型');
             $table->json('particulars')->comment('商品详情');
             $table->integer('usable_integral')->comment('可使用积分')->nullable();
@@ -32,6 +35,6 @@ class CreateMerchandisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('merchandises');
+        Schema::dropIfExists('commoditys');
     }
 }

@@ -13,6 +13,9 @@ class CreateIntegralLogsTable extends Migration
      */
     public function up()
     {
+        /**
+         * 创建积分记录表
+         */
         Schema::create('integralLogs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('用户id');

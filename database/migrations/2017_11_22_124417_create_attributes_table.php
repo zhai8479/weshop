@@ -13,9 +13,12 @@ class CreateAttributesTable extends Migration
      */
     public function up()
     {
+        /*
+         *创建商品属性表
+         */
         Schema::create('attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('merchandises_id')->comment('商品id');
+            $table->integer('commodity_id')->comment('商品id');
             $table->string('attribute',40)->comment('属性');
             $table->string('attributes_value',40)->comment('属性值');
             $table->integer('unique_identifier')->comment('唯一标识');
