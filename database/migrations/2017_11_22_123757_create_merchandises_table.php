@@ -17,7 +17,6 @@ class CreateMerchandisesTable extends Migration
             $table->increments('id');
             $table->string('merchandise_name',40)->comment('商品标题');
             $table->string('type',20)->comment('商品类型');
-            $table->integer('stock')->comment('商品库存');
             $table->json('particulars')->comment('商品详情');
             $table->integer('integrable_integral')->comment('可获得积分')->nullable();
             $table->integer('usable_integral')->comment('可使用积分')->nullable();

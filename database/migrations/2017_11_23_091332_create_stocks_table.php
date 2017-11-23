@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributesTable extends Migration
+class CreateStocksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('merchandises_id')->comment('商品id');
-            $table->string('attribute',40)->comment('属性');
-            $table->string('attributes_value',40)->comment('属性值');
             $table->integer('unique_identifier')->comment('唯一标识');
+            $table->integer('num_stock')->comment('库存数量');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('stocks');
     }
 }
