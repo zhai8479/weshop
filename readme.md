@@ -1,53 +1,62 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# 项目概述
+- 产品名称: weshop
+- 项目地址: https://github.com/zhai8479/weshop
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+weshop 是一个简单的 RestFul 风格的商城服务端.使用Laravel 5.5 编写而成
 
-## About Laravel
+# 功能如下
+- 用户认证: 注册, 登陆, 登出
+- 个人中心: 个人信息显示, 信息编辑
+- 积分: 积分获取, 积分使用, 积分显示
+- 后台: 控制用户信息, 控制商品信息等后台管理
+- 商品: 添加商品, 修改商品, 显示商品, 购买商品
+- 订单: 创建订单, 支付订单, 订单状态等
+- 收货地址: 管理收货地址
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+# 运行环境
+- CentOS/>=7.0
+- PHP/>=7.0
+- MySQL/>=5.6
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# 开发环境部署/安装
+1. 克隆代码
+克隆 `weshop` 到本地目录中
+```bash
+git clone git@github.com:zhai8479/weshop.git
+```
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+2. 配置本地编辑器与开发服务器文件同步操作
 
-## Learning Laravel
+3. 安装依赖包
+```bash
+composer install -vvv
+```
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+4. 生成配置文件
+```
+cp .env.example .env
+```
+根据情况更改 `.env` 中的配置
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+5. 生成表及数据填充
+```
+php artisan migrate --seed
+```
 
-## Laravel Sponsors
+6. 生成密钥
+```
+php artisan key:generate
+```
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+7. 配置hosts (可选)
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
 
-## Contributing
+# 服务器架构说明
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+# 代码上线
 
-## Security Vulnerabilities
+# 扩展包说明
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+# 自定义 Artisan 命令列表
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+# 队列列表
