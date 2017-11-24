@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "weshop",
+    "description": "shop by laravel",
+    "keywords": ["laravel", "shop"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -11,7 +11,8 @@
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "tcg/voyager": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

@@ -18,14 +18,47 @@ class CreateOrdersTable extends Migration
          */
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->comment('用户id')->unique();
-            $table->integer('commodity_id')->comment('商品id');
-            $table->integer('order_price')->comment('订单总价');
-            $table->integer('order_status')->comment('订单状态')->default(1);
-            $table->integer('payment_status')->comment('支付状态')->default(1);
-            $table->integer('payment_order')->comment('支付单号');
-            $table->integer('shipment_number')->comment('物流单号')->unique();
+            $table->integer('user_id')->unique()
+                ->comment('用户id');
+            $table->integer('commodity_id')
+                ->comment('商品id');
+            $table->integer('order_price')
+                ->comment('订单总价');
+            $table->integer('order_status')->default(1)
+                ->comment('订单状态 1. 待支付 2. 待发货 3. 已发货 4. 已签收 5. 未支付取消 6. 已支付取消 7. 超时取消 8. 管理员取消');
+            $table->tinyInteger('payment_status')->default(1)
+                ->comment('支付状态 1. 待支付 2. 已支付 3. 已取消');
+            $table->string('payment_order')
+                ->comment('支付单号');
+            $table->integer('shipment_number')->unique()
+                ->comment('物流单号');
+            $table->string('note')
+                ->comment('订单备注');
+
+            // 积分信息
+
+            // 物流信息
+            $table->string('receiving_address')
+                ->comment('收货地址');
+            $table->string('receiving_phone', 11)
+                ->comment('收货电话');
+            $table->string('receiving_name')
+                ->comment('收件人姓名');
+
             $table->timestamps();
+        });
+
+        /**
+         * 创建订单商品记录表
+         */
+        Schema::create('order_commodities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('order_id')
+                ->comment('订单id');
+            $table->integer('commodity_num')
+                ->comment('商品序号');
+            $table->string('商品属性与属性值')
+                ->comment();
         });
     }
 

@@ -18,7 +18,7 @@ class CreatePostagesTable extends Migration
          */
         Schema::create('postages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('strategy')->comment('邮费策略，1.包邮 2.满包 3.不包');
+            $table->tinyInteger('strategy')->comment('邮费策略，1.包邮 2.满包 3.不包');
             $table->float('amount')->comment('邮费金额');
             $table->timestamps();
         });
