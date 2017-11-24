@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
                 ->comment('注册ip');
             $table->string('avatar_url')->nullable()
                 ->comment('头像路径');
-            $table->string('invite')->unique()
+            $table->string('invite', 100)->unique()
                 ->comment('邀请码');
             $table->integer('invite_id')->nullable()
                 ->comment('邀请人id');
