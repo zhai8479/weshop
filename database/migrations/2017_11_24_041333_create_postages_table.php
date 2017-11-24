@@ -13,6 +13,9 @@ class CreatePostagesTable extends Migration
      */
     public function up()
     {
+        /**
+         * 创建邮费表
+         */
         Schema::create('postages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('strategy')->comment('邮费策略，1.包邮 2.满包 3.不包');

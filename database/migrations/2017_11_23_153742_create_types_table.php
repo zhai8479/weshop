@@ -13,6 +13,9 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
+        /**
+         * 创建商品类型表
+         */
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('commodity_id')->comment('商品类型名称');
