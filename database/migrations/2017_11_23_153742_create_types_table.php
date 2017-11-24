@@ -15,7 +15,7 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('commodity_id')->comment('商品id');
+            $table->string('commodity_id')->comment('商品类型名称');
             $table->timestamps();
         });
     }

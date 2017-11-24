@@ -22,8 +22,8 @@ class CreateOrdersTable extends Migration
             $table->integer('commodity_id')->comment('商品id');
             $table->integer('order_price')->comment('订单总价');
             $table->integer('order_status')->comment('订单状态')->default(1);
-            $table->integer('Payment_status')->comment('支付状态')->default(1);
-            $table->integer('Payment_order')->comment('支付单号');
+            $table->integer('payment_status')->comment('支付状态')->default(1);
+            $table->integer('payment_order')->comment('支付单号');
             $table->integer('shipment_number')->comment('物流单号')->unique();
             $table->timestamps();
         });
