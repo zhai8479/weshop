@@ -13,4 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::any('test', 'TestController@test');
+Route::middleware('jwt.auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::group(['prefix' => 'user', 'middleware' => 'api'], function () {
+    //注册
+    Route::post('register', 'UserController@register');
+    //登陆
+    Route::post('login', 'UserController@login');
+    //获取自己的信息
+    Route::group(['middleware' => 'jwt.api.auth:jwt.refresh'], function () {
+        Route::get('show', 'UserController@show');
+        Route::post('update', 'UserController@update');
+        Route::post('avatar', 'UserController@avatar');
+    });
+    //获取用户的信息
+    Route::post('see', 'UserController@see');
+});
