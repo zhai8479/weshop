@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
                 ->comment('注册类型 1、手机号注册 2、邮箱注册 3、qq 4、微信 5、微博');
             $table->string('mobile', 11)->nullable()->unique()
                 ->comment('手机号');
-            $table->tinyInteger(' from_platform')
+            $table->tinyInteger(' from_platform')->nullable()
                 ->comment('平台来源 1、微信 2、qq 3、微博');
             $table->ipAddress('reg_ip')->nullable()
                 ->comment('注册ip');
