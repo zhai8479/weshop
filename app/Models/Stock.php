@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 商品库存表
+ *
+ * admin 控制
+ *
  * Class Stock
  *
  * @package App\Models

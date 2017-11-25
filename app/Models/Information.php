@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 用户收货信息表
+ *
+ * user 控制
+ *
  * Class Information
  *
  * @package App\Models

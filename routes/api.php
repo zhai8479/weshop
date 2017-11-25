@@ -30,3 +30,5 @@ Route::group(['prefix' => 'user', 'middleware' => 'api'], function () {
     //获取用户的信息
     Route::post('see', 'UserController@see');
 });
+
+Route::any('test', 'TestController@test');

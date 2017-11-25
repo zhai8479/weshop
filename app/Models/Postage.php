@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 邮费设置表
+ *
+ * admin 控制
+ *
  * Class Postage
  *
  * @package App\Models

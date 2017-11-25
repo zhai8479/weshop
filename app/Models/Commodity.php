@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 商品表
+ *
+ * admin 控制
+ *
  * Class Commodity
  *
  * @package App\Models

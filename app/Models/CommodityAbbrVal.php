@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 商品属性值表
+ *
+ * admin 控制
+ *
  * Class CommodityAbbrVal
  *
  * @package App\Models

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 用户积分变动表
+ *
+ * user 控制
+ *
  * Class IntegralLog
  *
  * @package App\Models

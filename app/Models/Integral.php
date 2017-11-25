@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * 用户积分表
- * 
+ *
+ * user 控制
+ *
  * Class Integral
  *
  * @package App\Models

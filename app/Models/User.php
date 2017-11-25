@@ -6,6 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
+ * 用户表
+ *
+ * user 控制
+ *
  * App\Models\User
  *
  * @property int $id
