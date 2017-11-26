@@ -28,3 +28,11 @@ Route::group(['prefix' => 'users'], function () {
     //获取用户列表
     Route::post('index','UserController@index');
 });
+
+Route::group(['prefix' => 'informations'], function () {
+    Route::post('store', 'InformationController@store');
+    Route::post('update', 'InformationController@update');
+    Route::get('index', 'InformationController@index');
+    Route::get('show/{id}', 'InformationController@show');
+    Route::delete('delete/{id}', 'InformationController@delete');
+});

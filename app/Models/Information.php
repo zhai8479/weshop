@@ -36,5 +36,6 @@ class Information extends Model
 
     public $timestamps = true;
 
-    protected $fillable = [];
+    protected $guarded = [];
+
 }

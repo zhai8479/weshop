@@ -21,7 +21,7 @@ class RefreshToken
     {
         $response = $next($request);
 
-        if ($request->hasHeader('authorization')) {
+        if ($request->hasHeader('authorization') && !config('app.debug')) {
             try {
                 $newToken = \JWTAuth::setRequest($request)->parseToken()->refresh();
             } catch (TokenExpiredException $e) {

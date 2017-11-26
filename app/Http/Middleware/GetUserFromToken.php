@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Support\Facades\Event;
+use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class GetUserFromToken
 {
@@ -19,36 +19,15 @@ class GetUserFromToken
      */
     public function handle($request, Closure $next)
     {
+        if (! $token = JWTAuth::setRequest($request)->getToken()) {
+            return response()->json(['msg' => __('token_not_provided'), 'code' => 400]);
+        }
         try {
-
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json([
-                    'errcode' => 400004,
-                    'errmsg' => 'user not found'
-                ], 404);
-            }
-
+            JWTAuth::authenticate($token);
         } catch (TokenExpiredException $e) {
-
-            return response()->json([
-                'errcode' => 400001,
-                'errmsg' => 'token expired'
-            ], $e->getStatusCode());
-
-        } catch (TokenInvalidException $e) {
-
-            return response()->json([
-                'errcode' => 400003,
-                'errmsg' => 'token invalid'
-            ], $e->getStatusCode());
-
-        } catch (JWTException $e) {
-
-            return response()->json([
-                'errcode' => 400002,
-                'errmsg' => 'token absent'
-            ], $e->getStatusCode());
-
+            return response()->json(['msg' => __('token_expired'), 'code' => 401]);
+        }  catch (JWTException $e) {
+            return response()->json(['msg' => __('token_absent'), 'code' => 402, 'errors' => [$e->getMessage()]]);
         }
         return $next($request);
     }
