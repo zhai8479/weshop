@@ -161,4 +161,65 @@ class UserController extends Controller
             return $this->array_response([], '登陆成功')->withHeaders(['authorization' => 'Bearer ' . $token]);
         }
     }
+
+
+    /**
+     * 获取自己的信息
+     */
+
+    public function show(Request $request)
+    {
+        $user = \Auth::user();
+        return response()->json(
+            [
+            'data' => $user,
+            'msg' => 'succsess',
+            'code' => 0,
+            ]);
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'email|unique:users',
+            'password' => 'string|min:6|max:20',
+            'name' => 'string|min:2|max:20',
+            'mobile' =>'int|digits:11'
+        ]);
+        $input = $request->only('email','password','name');
+        if ($request->has('password')) {
+            $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
+        }
+        $user = $request->user();
+        try {
+            foreach ($input as $key => $value) {
+                $user->$key = $value;
+            }
+            $user->save();
+        } catch (\Exception $exception) {
+            return $this->error_response('修改失败');
+        }
+        return $this->array_response(['user' => $user]);
+    }
+
+    /**
+     * 获取上传的用户头像
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function avatar(Request $request)
+    {
+        $destinationPath = 'avatar/';
+        $this->validate($request,[
+            'avatar'=>'required|image|min:10|max:3072'
+        ]);
+        $file = $request->file('avatar');
+        $file_name = \Auth::user()->id . '_' . time() . $file->getClientOriginalName();
+        $file->move($destinationPath, $file_name);
+        $user = User::findOrFail(\Auth::user()->id);
+        $user->avatar_url = '/' . $destinationPath . $file_name;
+        $user->save();
+        return $this->array_response(['user' =>$user],'头像上传成功');
+    }
 }
+
