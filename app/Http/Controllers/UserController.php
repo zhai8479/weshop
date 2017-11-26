@@ -9,9 +9,17 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:users',
+            'email' => 'email|unique:users',
             'password' => 'required|string|min:6|max:20',
             'name' => 'required|string|min:2|max:20',
+            'reg_type' => 'required|int',
+            'mobile' => 'int|min:11|max:11',
+            'from_platform' => 'int|min:2|max:20',
+            'reg_ip' => 'string|min:8|max:40',
+            'avatar_url' => 'string|min:2|max:20',
+            'invite' => 'required|string|min:8|max:40',
+            'invite_id' => 'int|min:1|max:20',
+            'openid' => 'string|min:2|max:100',
         ]);
         try {
             $user = User::create([
