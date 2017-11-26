@@ -27,6 +27,4 @@ Route::group(['prefix' => 'user', 'middleware' => 'api'], function () {
         Route::post('update', 'UserController@update');
         Route::post('avatar', 'UserController@avatar');
     });
-    //获取用户的信息
-    Route::post('see', 'UserController@see');
 });
