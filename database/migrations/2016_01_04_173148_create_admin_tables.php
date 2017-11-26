@@ -1,7 +1,9 @@
 <?php
 
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 
 class CreateAdminTables extends Migration
 {
@@ -89,6 +91,10 @@ class CreateAdminTables extends Migration
             $table->index('user_id');
             $table->timestamps();
         });
+
+        if (Administrator::count() == 0) {
+            Artisan::call('db:seed', ['--class' => \Encore\Admin\Auth\Database\AdminTablesSeeder::class]);
+        }
     }
 
     /**
