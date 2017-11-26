@@ -60,4 +60,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = password_hash($value, PASSWORD_DEFAULT);
+    }
 }

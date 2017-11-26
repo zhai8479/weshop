@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -75,7 +76,6 @@ class UserController extends Controller
         // 处理数据
         $create = $request->all();
         unset($create['code']);
-        $create['password'] = password_hash($create['password'], PASSWORD_DEFAULT);
         $create['reg_type'] = User::REG_TYPE_MOBILE;
         $create['reg_ip'] = $request->ip();
         $create['invite'] = microtime(true) * 10000 . '_' . substr($create['mobile'], 7, 4);
@@ -116,19 +116,28 @@ class UserController extends Controller
     {
         
     }
-    
+
+    /**
+     * 登陆
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|exists:users',
+            'mobile' => 'required_without:email|string|exists:users|min:11',
+            'email' => 'required_without:mobile|email|exists:users',
             'password' => 'required|string|min:6|max:20',
         ]);
-        $user = User::where('email', $request->email)->first();
-        if (!password_verify($request->password, $user->password))
+        if ($request->has('mobile'))
+            $user = User::whereMobile($request->input('mobile'))->first();
+        else
+            $user = User::whereEmail($request->input('email'))->first();
+        if (!password_verify($request->input('password'), $user->password)){
             return $this->error_response('密码错误');
-        else {
+        } else {
             $token = \JWTAuth::fromUser($user);
-            return $this->array_response('登陆成功')->withHeaders(['authorization' => 'Bearer ' . $token]);
+            return $this->array_response([], '登陆成功')->withHeaders(['authorization' => 'Bearer ' . $token]);
         }
     }
 }

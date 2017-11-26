@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -27,7 +28,7 @@ class Controller extends BaseController
      * @param string $msg
      * @param int $code
      * @param array $errors
-     * @return array
+     * @return JsonResponse
      */
     protected function array_response($data = [], $msg = '', $code = 0, $errors = [])
     {
@@ -51,7 +52,7 @@ class Controller extends BaseController
      * 返回无数据的消息
      * @param string $msg
      * @param int $code
-     * @return array
+     * @return JsonResponse
      */
     protected function no_content ($msg = '', $code = 0) {
         return $this->array_response([], $msg, $code);
@@ -62,7 +63,7 @@ class Controller extends BaseController
      * @param string $msg
      * @param int $code
      * @param array $errors
-     * @return array
+     * @return JsonResponse
      */
     protected function error_response($msg = '', $code = 100, $errors = []) {
         if (empty($msg)) $msg = __('message.fail');
@@ -71,7 +72,7 @@ class Controller extends BaseController
 
     /**
      * 未登录
-     * @return array
+     * @return JsonResponse
      */
     protected function no_auth () {
         return $this->error_response(__('message.no login'), $code = 401);
@@ -79,7 +80,7 @@ class Controller extends BaseController
 
     /**
      * 未找到数据
-     * @return array
+     * @return JsonResponse
      */
     protected function no_found () {
         return $this->error_response(__('message.not found'), $code = 404);
