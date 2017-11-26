@@ -13,5 +13,7 @@ return [
     'not found' => '未找到数据',
     'send sms code fail' => '发送验证码失败',
     'send sms code success' => '发送验证码成功',
-    'sms code error' => '发送验证码失败'
+    'sms code error' => '发送验证码失败',
+    'token_expired' => 'token超时',
+    'token_invalid' => 'token无效',
 ];

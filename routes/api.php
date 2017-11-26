@@ -13,20 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('jwt.auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::group(['prefix' => 'user', 'middleware' => 'api'], function () {
+Route::group(['prefix' => 'users'], function () {
     //注册
-    Route::post('register', 'UserController@register');
+    Route::post('mobile_register', 'UserController@mobile_register');
+    // 发送手机验证码
+    Route::post('send_mobile_reg_code', 'UserController@send_mobile_reg_code');
+    Route::post('email_register', 'UserController@email_register');
     //登陆
     Route::post('login', 'UserController@login');
     //获取自己的信息
-    Route::group(['middleware' => 'jwt.api.auth:jwt.refresh'], function () {
-        Route::get('show', 'UserController@show');
-        Route::post('update', 'UserController@update');
-        Route::post('avatar', 'UserController@avatar');
-    });
+    Route::get('show', 'UserController@show');
+    Route::post('update', 'UserController@update');
+    Route::post('avatar', 'UserController@avatar');
     //获取用户列表
     Route::post('index','UserController@index');
 });

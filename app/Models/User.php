@@ -47,6 +47,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const REG_TYPE_MOBILE = 1;  // 手机号注册
+    const REG_TYPE_EMAIL = 2;   // 邮箱注册
+    const REG_TYPE_QQ = 3;      // qq
+    const REG_TYPE_WECHAT = 4;  // 微信
+    const REG_TYPE_WEIBO = 5;   // 微博
+
     public $timestamps = true;
 
     protected $guarded = [];
