@@ -44,3 +44,10 @@ Route::group(['prefix' => 'informations'], function () {
     //删除收货信息
     Route::delete('delete/{id}', 'InformationController@delete');
 });
+
+Route::group(['prefix' => 'integral'],function (){
+    //查看积分数量
+    Route::get('see','IntegralController@see');
+    //查看积分记录
+    Route::get('show','IntegralController@show');
+});
