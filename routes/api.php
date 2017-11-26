@@ -19,6 +19,7 @@ Route::group(['prefix' => 'users'], function () {
     // 发送手机验证码
     Route::post('send_mobile_reg_code', 'UserController@send_mobile_reg_code');
     Route::post('email_register', 'UserController@email_register');
+    Route::post('send_email_reg_code', 'UserController@send_email_reg_code');
     //登陆
     Route::post('login', 'UserController@login');
     //获取自己的信息
