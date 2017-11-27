@@ -220,6 +220,20 @@ class CreateAdminTables extends Migration
                 'icon'      => 'fa-sliders',
                 'uri'       => 'api-tester',
             ],
+            [
+                'parent_id' => 0,
+                'order'     => 0,
+                'title'     => 'User',
+                'icon'      => 'fa-sliders',
+                'uri'       => '',
+            ],
+            [
+                'parent_id' => 9,
+                'order'     => 0,
+                'title'     => 'Users',
+                'icon'      => 'fa-sliders',
+                'uri'       => 'users',
+            ],
         ]);
 
         // add role to menu.

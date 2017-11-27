@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\UserController;
 use Illuminate\Routing\Router;
 
 Admin::registerAuthRoutes();
@@ -10,6 +11,7 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    $router->get('/', 'HomeController@index');
+    $router->get('/', 'App\Admin\Controllers\HomeController@index');
 
+    $router->resource('/users', UserController::class);
 });

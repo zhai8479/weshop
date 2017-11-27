@@ -24,7 +24,7 @@ return [
 
         'prefix' => 'admin',
 
-        'namespace'     => 'App\\Admin\\Controllers',
+        'namespace'     => '',
 
         'middleware'    => ['web', 'admin'],
     ],

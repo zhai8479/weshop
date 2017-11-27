@@ -53,6 +53,14 @@ class User extends Authenticatable
     const REG_TYPE_WECHAT = 4;  // 微信
     const REG_TYPE_WEIBO = 5;   // 微博
 
+    public static $reg_type_list = [
+        1 => '手机号',
+        2 => '邮箱',
+        3 => 'qq',
+        4 => '微信',
+        5 => '微博'
+    ];
+
     public $timestamps = true;
 
     protected $guarded = [];
