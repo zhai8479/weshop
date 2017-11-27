@@ -47,7 +47,7 @@ Route::group(['prefix' => 'informations'], function () {
 
 Route::group(['prefix' => 'integral'],function (){
     //查看积分数量
-    Route::get('see','IntegralController@see');
+//    Route::get('see','IntegralController@see');
     //查看积分记录
-    Route::get('show','IntegralController@show');
+//    Route::get('show','IntegralController@show');
 });
