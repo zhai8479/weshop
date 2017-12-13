@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\GetUserFromToken;
 use App\Http\Middleware\RefreshToken;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -59,7 +60,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'jwt.refresh' => RefreshToken::class,
-        'jwt.auth' => \App\Http\Middleware\GetUserFromToken::class,
+        'jwt.api.refresh' => RefreshToken::class,
+        'jwt.api.auth' => GetUserFromToken::class,
     ];
 }

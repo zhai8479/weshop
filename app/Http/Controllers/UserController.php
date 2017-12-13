@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Mail;
 
 class UserController extends Controller
 {
@@ -12,9 +14,9 @@ class UserController extends Controller
     {
         $this->middleware('api');
 
-        $this->middleware('jwt.refresh');
+        $this->middleware('jwt.api.refresh');
 
-        $this->middleware('jwt.auth')->except([
+        $this->middleware('jwt.api.auth')->except([
             'login', 'index', 'mobile_register', 'send_mobile_reg_code', 'email_register', 'send_email_reg_code'
             ]);
     }
@@ -64,7 +66,7 @@ class UserController extends Controller
     /**
      * 发送手机验证码
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
     public function send_mobile_reg_code(Request $request)
     {
@@ -80,7 +82,7 @@ class UserController extends Controller
     /**
      * 邮箱注册
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
     public function email_register(Request $request)
     {
@@ -90,11 +92,18 @@ class UserController extends Controller
             'code' => 'required|string|min:4|max:10',
             'password' => 'required|string|min:6|max:20',
             'user_name' => 'required|string|min:2|max:20',
-            'from_platform' => 'integer|min:2|max:20',
+            'from_platform' => 'integer|max:4',
             'invite_id' => 'integer|min:1|max:20|exists:users,id',
         ]);
 
-        // todo 处理验证码
+        //  处理验证码
+        $email = $request->input('email');
+        $code = $request->input('code');
+        if (empty($email)||empty($code)) return $this->error_response('验证码或邮箱为空');
+        $cache_code = Cache::get('send_email_code_' . $email);
+        \Log::info('验证码',[$email,$code,$cache_code]);
+        if (empty($cache_code)) return $this->error_response('验证码不存在');
+           if ($code !== $cache_code) return $this->error_response('验证码验证错误');
 
         // 处理数据
         $create = $request->all();
@@ -124,16 +133,22 @@ class UserController extends Controller
     /**
      * 发送邮箱验证码
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
     public function send_email_reg_code(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|max:15|unique:users'
+            'email' => 'required|email|unique:users'
         ]);
         $email = $request->input('email');
-        // todo 生成并储存验证码
-
+        //  生成并储存验证码
+        $srand = rand(1000,9999);
+        Mail::raw('您的验证码是：'.$srand,function($message)use ($email){
+            $message ->to($email)->subject('测试邮件');
+        });
+        Cache::put('send_email_code_' . $email, $srand, 30);
+        $value = Cache::get('send_email_code_' . $email);
+        \Log::info('邮箱和验证码',[$email,$srand,$value]);
         return $this->array_response([], '验证码发送成功');
     }
 

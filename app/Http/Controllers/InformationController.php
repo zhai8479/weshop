@@ -11,9 +11,9 @@ class InformationController extends Controller
     {
         $this->middleware('api');
 
-        $this->middleware('jwt.auth')->except([]);
+        $this->middleware('jwt.api.auth')->except([]);
 
-        $this->middleware('jwt.refresh');
+        $this->middleware('jwt.api.refresh');
     }
 
     /**

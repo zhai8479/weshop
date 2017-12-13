@@ -51,3 +51,4 @@ Route::group(['prefix' => 'integral'],function (){
     //查看积分记录
 //    Route::get('show','IntegralController@show');
 });
+

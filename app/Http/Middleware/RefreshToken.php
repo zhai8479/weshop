@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class RefreshToken
 {
@@ -20,6 +18,7 @@ class RefreshToken
     public function handle($request, \Closure $next)
     {
         $response = $next($request);
+
 
         if ($request->hasHeader('authorization') && !config('app.debug')) {
             try {
