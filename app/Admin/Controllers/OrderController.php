@@ -2,17 +2,19 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Commodity;
-use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\ModelForm;
+use App\Models\Order;
+
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
-use Encore\Admin\Grid;
-use Encore\Admin\Form;
+use App\Http\Controllers\Controller;
+use Encore\Admin\Controllers\ModelForm;
 
-class CommodityController extends Controller
+class OrderController extends Controller
 {
     use ModelForm;
+
     /**
      * Index interface.
      *
@@ -22,12 +24,13 @@ class CommodityController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('商品表');
-            $content->description('列表');
+            $content->header('订单表');
+            $content->description('description');
 
             $content->body($this->grid());
         });
     }
+
     /**
      * Edit interface.
      *
@@ -38,12 +41,13 @@ class CommodityController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('商品');
-            $content->description('编辑');
+            $content->header('订单表');
+            $content->description('description');
 
             $content->body($this->form()->edit($id));
         });
     }
+
     /**
      * Create interface.
      *
@@ -53,8 +57,8 @@ class CommodityController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('商品');
-            $content->description('创建');
+            $content->header('header');
+            $content->description('description');
 
             $content->body($this->form());
         });
@@ -63,12 +67,12 @@ class CommodityController extends Controller
     /**
      * Make a grid builder.
      *
-     * @return \Encore\Admin\Grid
+     * @return Grid
      */
     protected function grid()
     {
-        return Admin::grid(Commodity::class, function (Grid $grid) {
-            $grid->model()->orderBy('id', 'desc');
+        return Admin::grid(Order::class, function (Grid $grid) {
+
             $grid->id('ID')->sortable();
 
             $grid->created_at();
@@ -79,11 +83,11 @@ class CommodityController extends Controller
     /**
      * Make a form builder.
      *
-     * @return \Encore\Admin\Form
+     * @return Form
      */
     protected function form()
     {
-        return Admin::form(Commodity::class, function (Form $form) {
+        return Admin::form(Order::class, function (Form $form) {
 
             $form->display('id', 'ID');
 

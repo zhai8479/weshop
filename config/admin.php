@@ -5,12 +5,12 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name'      => 'weshop-admin',
+    'name'      => '小商城管理后台',
 
     /*
      * Logo in admin panel header.
      */
-    'logo'      => '<b>WeShop</b> admin',
+    'logo'      => '<b>小商城</b> 管理后台',
 
     /*
      * Mini-logo in admin panel header.

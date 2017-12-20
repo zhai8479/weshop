@@ -23,7 +23,7 @@ class CreateCommoditiesTable extends Migration
         });
 
         /**
-         * 商品属性类别表
+         * 商品属性名称表
          */
         Schema::create('commodity_abbr_types', function (Blueprint $table) {
             $table->increments('id');
@@ -67,6 +67,10 @@ class CreateCommoditiesTable extends Migration
                 ->comment('商品id');
             $table->integer('num_stock')
                 ->comment('库存数量');
+            $table->float('price_tag')->nullable()
+                ->comment('标价');
+            $table->float('present_price')
+                ->comment('现价');
             $table->integer('give_integral_num')
                 ->comment('赠送积分数量');
             $table->integer('usable_integral_num')
@@ -91,10 +95,6 @@ class CreateCommoditiesTable extends Migration
                 ->comment('列表显示图片');
             $table->string('carousel_img')->nullable()
                 ->comment('轮播显示图片');
-            $table->float('price_tag')->nullable()
-                ->comment('标价');
-            $table->float('present_price')
-                ->comment('现价');
             $table->integer('postage_id')
                 ->comment('邮费规则id');
             $table->integer('weight')->default(0)
