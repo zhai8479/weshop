@@ -7,6 +7,7 @@ use App\Admin\Controllers\CommodityTypeController;
 use App\Admin\Controllers\CommodityAbbrTypeController;
 use App\Admin\Controllers\CommodityAbbrValController;
 use App\Admin\Controllers\OrderController;
+use App\Admin\Controllers\InformationController;
 Admin::registerAuthRoutes();
 
 Route::group([
@@ -23,4 +24,5 @@ Route::group([
     $router->resource('/commodity_abbr_types',CommodityAbbrTypeController::class);
     $router->resource('/commodity_abbr_vals',CommodityAbbrValController::class);
     $router->resource('/orders',OrderController::class);
+    $router->resource('/informations',InformationController::class);
 });

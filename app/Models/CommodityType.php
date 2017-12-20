@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Encore\Admin\Traits\AdminBuilder;
+use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,16 +20,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CommodityType whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CommodityType whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CommodityType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CommodityType whereTitle($value)
+ *  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CommodityType whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CommodityType whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class CommodityType extends Model
 {
+    use ModelTree, AdminBuilder;
     protected $table = 'commodity_types';
-
 
     public $timestamps = true;
 
-    protected $fillable = [];
+    protected $guarded = [];
 }

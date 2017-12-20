@@ -41,5 +41,7 @@ class CreatePostagesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('postages');
+        Schema::dropIfExists('post_commodities');
+
     }
 }

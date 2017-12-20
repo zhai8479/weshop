@@ -74,6 +74,7 @@ class CommodityAbbrTypeController extends Controller
         return Admin::grid(CommodityAbbrType::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->name('属性名称');
 
             $grid->created_at();
             $grid->updated_at();
@@ -90,6 +91,7 @@ class CommodityAbbrTypeController extends Controller
         return Admin::form(CommodityAbbrType::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('name','属性名称');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

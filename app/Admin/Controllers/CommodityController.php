@@ -70,7 +70,6 @@ class CommodityController extends Controller
         return Admin::grid(Commodity::class, function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
-
             $grid->created_at();
             $grid->updated_at();
         });

@@ -98,6 +98,9 @@ class CreateAdminTables extends Migration
         $this->initAdminDatabase();
     }
 
+    /**
+     *
+     */
     public function initAdminDatabase()
     {
         // create a user.
@@ -233,6 +236,69 @@ class CreateAdminTables extends Migration
                 'title'     => '用户列表',
                 'icon'      => 'fa-sliders',
                 'uri'       => 'users',
+            ],
+            [
+                'parent_id' => 0,
+                'order'     => 0,
+                'title'     => '商品管理',
+                'icon'      => 'fa-cubes',
+                'uri'       => '',
+            ],
+            [
+                'parent_id' => 11,
+                'order'     => 0,
+                'title'     => '商品类型表',
+                'icon'      => 'fa-bars',
+                'uri'       => '/commodityType',
+            ],
+            [
+                'parent_id' => 11,
+                'order'     => 0,
+                'title'     => '商品表',
+                'icon'      => 'fa-bars',
+                'uri'       => '/commodity',
+            ],
+            [
+                'parent_id' => 0,
+                'order'     => 0,
+                'title'     => '属性管理',
+                'icon'      => 'fa-bars',
+                'uri'       => '',
+            ],
+            [
+                'parent_id' => 14,
+                'order'     => 0,
+                'title'     => '属性名称表',
+                'icon'      => 'fa-bars',
+                'uri'       => '/commodity_abbr_types',
+            ],
+            [
+                'parent_id' => 14,
+                'order'     => 0,
+                'title'     => '属性值表',
+                'icon'      => 'fa-bars',
+                'uri'       => '/commodity_abbr_vals',
+            ],
+            [
+                'parent_id' => 0,
+                'order'     => 0,
+                'title'     => '订单表',
+                'icon'      => 'fa-balance-scale',
+                'uri'       => '',
+            ],
+            [
+                'parent_id' => 17,
+                'order'     => 0,
+                'title'     => '订单列表',
+                'icon'      => 'fa-bars',
+                'uri'       => '/orders',
+            ],
+            [
+                'parent_id' => 9,
+                'order'     => 0,
+                'title'     => '收货地址表',
+                'icon'      => 'fa-bars',
+                'uri'       => '/informations',
             ],
         ]);
 

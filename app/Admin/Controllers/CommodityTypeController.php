@@ -3,15 +3,14 @@
 namespace App\Admin\Controllers;
 
 use App\Models\CommodityType;
-
 use Encore\Admin\Form;
-use Encore\Admin\Grid;
+use Encore\Admin\Tree;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-class CommodityTypeController extends Controller
+class CommodityTypeController extends BaseController
 {
     use ModelForm;
 
@@ -24,10 +23,9 @@ class CommodityTypeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('商品列表');
-            $content->description('创建');
-
-            $content->body($this->grid());
+            $content->header('商品类型列表');
+            $content->description('列表');
+            $content->body(CommodityType::tree());
         });
     }
 
@@ -41,11 +39,33 @@ class CommodityTypeController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('商品表');
-            $content->description('description');
+            $content->header('商品类型表');
+            $content->description('修改');
 
             $content->body($this->form()->edit($id));
         });
+    }
+
+    public function destroy($id)
+    {
+        if ($id <= 9) {
+            return response()->json([
+                'status'  => false,
+                'message' => trans('admin.delete_failed_by_default'),
+            ]);
+        } else {
+            if ($this->form()->destroy($id)) {
+                return response()->json([
+                    'status'  => true,
+                    'message' => trans('admin.delete_succeeded'),
+                ]);
+            } else {
+                return response()->json([
+                    'status'  => false,
+                    'message' => trans('admin.delete_failed'),
+                ]);
+            }
+        }
     }
 
     /**
@@ -57,28 +77,14 @@ class CommodityTypeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('商品类型表');
+            $content->description('创建');
 
             $content->body($this->form());
         });
     }
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
-    protected function grid()
-    {
-        return Admin::grid(CommodityType::class, function (Grid $grid) {
 
-            $grid->id('ID')->sortable();
-
-            $grid->created_at();
-            $grid->updated_at();
-        });
-    }
 
     /**
      * Make a form builder.
@@ -90,7 +96,10 @@ class CommodityTypeController extends Controller
         return Admin::form(CommodityType::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
+            $form->text('title','类型名称');
+            $options = $this->navigation_type_list(0);
+            $options[0] = '根目录';
+            $form->select('parent_id','所属栏目')->options($options);
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

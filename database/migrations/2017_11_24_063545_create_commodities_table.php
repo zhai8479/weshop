@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CommodityType;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +19,9 @@ class CreateCommoditiesTable extends Migration
          */
         Schema::create('commodity_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('商品类型名称');
+            $table->string('title')->comment('商品类型名称');
+            $table->integer('parent_id')->comment('所属id')->default(0);
+            $table->integer('order')->comment('权重')->default(0);
             $table->timestamps();
         });
 
@@ -39,7 +42,7 @@ class CreateCommoditiesTable extends Migration
             $table->increments('id');
             $table->integer('abbr_type_id')
                 ->comment('属性类型id');
-            $table->string('name')
+            $table->string('value')
                 ->comment('属性值');
             $table->timestamps();
         });
@@ -101,6 +104,8 @@ class CreateCommoditiesTable extends Migration
                 ->comment('权重');
             $table->timestamps();
         });
+
+        $this->write_menu();
     }
 
     /**
@@ -121,5 +126,12 @@ class CreateCommoditiesTable extends Migration
         Schema::dropIfExists('stocks');
 
         Schema::dropIfExists('commodities');
+    }
+
+    public function write_menu()
+    {
+        $content = file_get_contents(__DIR__  .'/commodity_types.json');
+        $arr = json_decode($content, true);
+        CommodityType::insert($arr['RECORDS']);
     }
 }

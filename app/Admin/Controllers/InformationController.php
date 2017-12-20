@@ -2,10 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\CommodityAbbrType;
-use App\Models\CommodityAbbrVal;
+use App\Models\Information;
 
-use App\Models\CommodityType;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -13,7 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-class CommodityAbbrValController extends Controller
+class InformationController extends Controller
 {
     use ModelForm;
 
@@ -26,8 +24,8 @@ class CommodityAbbrValController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('属性值表');
-            $content->description('description');
+            $content->header('收货地址');
+            $content->description('列表');
 
             $content->body($this->grid());
         });
@@ -43,7 +41,7 @@ class CommodityAbbrValController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('属性值表');
+            $content->header('收货地址');
             $content->description('description');
 
             $content->body($this->form()->edit($id));
@@ -59,7 +57,7 @@ class CommodityAbbrValController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('属性值表');
+            $content->header('header');
             $content->description('description');
 
             $content->body($this->form());
@@ -73,15 +71,9 @@ class CommodityAbbrValController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(CommodityAbbrVal::class, function (Grid $grid) {
+        return Admin::grid(Information::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->abbr_type_id('属性名称')->display(function ($value){
-                $types = CommodityAbbrType::find($value);
-                $title = $types->name;
-                return $title;
-            });
-            $grid->value('属性值')->sortable();
 
             $grid->created_at();
             $grid->updated_at();
@@ -95,20 +87,10 @@ class CommodityAbbrValController extends Controller
      */
     protected function form()
     {
-        return Admin::form(CommodityAbbrVal::class, function (Form $form) {
+        return Admin::form(Information::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->select('abbr_type_id','属性名称')->options(function (){
-                // todo 遍历所有属性名称
-                $types = CommodityAbbrType::query()
-                    ->get(['id', 'name']);
-                $options = [];
-                $types->reject(function ($type) use (&$options){
-                    $options[$type->id] = $type->name;
-                });
-                return $options;
-            });
-            $form->text('value','属性值');
+
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });
