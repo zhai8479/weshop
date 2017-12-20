@@ -99,7 +99,6 @@ class CommodityAbbrValController extends Controller
 
             $form->display('id', 'ID');
             $form->select('abbr_type_id','属性名称')->options(function (){
-                // todo 遍历所有属性名称
                 $types = CommodityAbbrType::query()
                     ->get(['id', 'name']);
                 $options = [];
