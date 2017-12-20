@@ -85,7 +85,13 @@ class CommodityController extends Controller
         return Admin::form(Commodity::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
+            $form->text('commodity_name','商品标题');
+            $form->select('type_id','商品类型');
+            $form->editor('particulars','商品详情');
+            $form->image('list_img','列表图片');
+            $form->image('carousel_img','轮播图片');
+            $form->select('postage_id','邮费规则');
+            $form->number('weight','权重');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });
