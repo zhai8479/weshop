@@ -4,13 +4,14 @@ namespace App\Admin\Controllers;
 
 use App\Models\Commodity;
 use App\Http\Controllers\Controller;
+use App\Models\CommodityType;
 use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Grid;
 use Encore\Admin\Form;
 
-class CommodityController extends Controller
+class CommodityController extends BaseController
 {
     use ModelForm;
     /**
@@ -70,6 +71,10 @@ class CommodityController extends Controller
         return Admin::grid(Commodity::class, function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
+            $grid->commodity_name('商品标题');
+            $grid->type_id('商品类型');
+            $grid->is_top('是否设置为推荐');
+            $grid->weight('权重');
             $grid->created_at();
             $grid->updated_at();
         });
@@ -86,7 +91,9 @@ class CommodityController extends Controller
 
             $form->display('id', 'ID');
             $form->text('commodity_name','商品标题');
-            $form->select('type_id','商品类型');
+            $options = $this->navigation_type_list(0);
+            $options[0] = '根目录';
+            $form->select('type_id','商品类型')->options($options);
             $form->editor('particulars','商品详情');
             $form->image('list_img','列表图片');
             $form->image('carousel_img','轮播图片');

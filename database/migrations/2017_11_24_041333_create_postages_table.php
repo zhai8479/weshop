@@ -19,7 +19,9 @@ class CreatePostagesTable extends Migration
         Schema::create('postages', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('strategy')->comment('邮费规则，1.包邮 2.满包 3.不包');
-            $table->float('amount')->comment('邮费金额');
+            $table->text('name')->comment('规则名');
+            $table->float('amount')->comment('满多少包邮');
+            $table->float('money')->comment('邮费金额');
             $table->timestamps();
         });
         /**

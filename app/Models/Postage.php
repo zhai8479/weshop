@@ -29,6 +29,12 @@ class Postage extends Model
     protected $table = 'postages';
 
     public $timestamps = true;
+    public static $strategys =[
+        1 =>'包邮',
+        2 =>'满包',
+        3 =>'不包',
+    ];
+
 
     protected $fillable = [];
 }
