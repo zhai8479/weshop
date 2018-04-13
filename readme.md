@@ -60,3 +60,5 @@ php artisan key:generate
 # 自定义 Artisan 命令列表
 
 # 队列列表
+
+git merge 学习
